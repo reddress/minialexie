@@ -1,0 +1,46 @@
+{% extends "alexie/base.html" %}
+
+{% block title %}Create Transaction{% endblock %}
+
+{% block content %}
+<form action="{% url 'alexie:transactionSaveCreate' %}" method="POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Date:</td>
+            <td>{{ form.created }}</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>{{ form.description }}</td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td>{{ form.amount }}</td>
+        </tr>
+        <tr>
+            <td>Debit</td>
+            <td>{{ form.debit }}</td>
+        </tr>
+        <tr>            
+            <td>Credit</td>
+            <td>{{ form.credit }}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Submit transaction"></td>
+        </tr>
+    </table>
+
+</form>
+
+<!-- Newest 25 transactions -->
+{% for transaction in newestTransactions %}
+{% include 'alexie/transactionSingleLine.html' %}
+{% endfor %}
+
+<script>
+    document.getElementById("id_description").focus();
+</script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "alexie/base.html" %}
+
+{% block title %}View Account{% endblock %}
+
+{% block content %}
+    {{ id }}
+    {{ account.name }}
+
+    {% for transaction in transactions %}
+
+{% include 'alexie/transactionSingleLine.html' %}
+
+    {% endfor %}
+
+{% endblock %}

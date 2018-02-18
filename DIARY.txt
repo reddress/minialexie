@@ -1,0 +1,67 @@
+* 24.nov.16
+
+A few days ago I initially worked on Transactions first. The Transaction Form is most verbose, and because amount is an IntegerField, I need a CharField to convert back and forth between amounts in cents or in whole amounts (dollars and cents).
+
+ModelForms do all the work for you.
+
+The last model I worked on was Account: Create and saveCreate
+
+* 24.nov.16
+
+Starting a new app to correct some of the mistakes in Alexie. Will call it benny (after Benjamin Franklin)
+
+$ python manage.py startapp benny
+
+Edit minialexie/settings.py, add benny to INSTALLED_APPS
+
+Edit models.py
+
+$ python manage.py makemigrations
+$ python manage.py migrate
+
+Using exactly the same names in benny creates clashes with existing alexie models. I added related_names to alexie models, then re-ran the migrations.
+
+Edit admin.py
+
+Added default value of Decimal(0) to Account.budget
+
+Wrote tests for benny, adding zero, one, and two transactions
+
+Added r'^benny/' as an url in minialexie/urls.py. Had to restart server.
+
+Rewrote index, no need for templatetags like alexie's index
+
+Compute balances in time period in view, because we cannot call functions with arguments in the template 
+
+Compute percentage spent in view, display as a fraction, like Alexie Beans
+
+* 24.nov.16 night (Ubuntu)
+
+Copied URLs from alexie to benny and stubbed views (defined function names and added 'pass' only)
+
+Copied base.html from alexie to benny
+
+Created AccountType Create, Update, and related Save views
+
+reverse can take arguments as kwargs (see accountTypeSaveUpdate)
+
+Copied and updated progress table in views.py
+
+* 26.nov.16
+
+Created a new app "nov26" in alicedj for trying out class-based views
+
+Following the topic "Class-based views"
+https://docs.djangoproject.com/en/1.10/topics/class-based-views/
+
+List view can be restricted to user's objects within the view
+
+When editing the form in a CreateView, use form_class=None to avoid a TypeError "missing 1 required positional argument". It is also written like that in the documentation.
+
+https://docs.djangoproject.com/en/1.10/ref/class-based-views/mixins-editing/
+
+Added get_absolute_url to Account model
+
+* 27.nov.16
+
+Bogus data for demo account in models.py
